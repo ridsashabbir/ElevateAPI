@@ -66,7 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    console.log("User not found or password does not match");
+    console.log("User not found or Password does not match");
     res.status(400);
     throw new Error("Invalid Credentials");
   }
