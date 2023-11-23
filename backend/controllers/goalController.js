@@ -2,7 +2,11 @@
 // @route    GET/api/goals
 // @access   private
 const getGoals = (req, res) => {
-  console.log(req.body);
+  if (!req.body.text) {
+    return res.status(400).json({ message: "please add a text field" });
+  }
+
+  // Only send the 200 response if the condition is not met
   res.status(200).json({ message: "Get goals" });
 };
 
