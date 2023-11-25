@@ -6,12 +6,13 @@ const Goal = require("../models/goalModel");
 // @access   private
 const getGoals = asyncHandler(async (req, res) => {
   const goals = await Goal.find();
+  const goalCount = goals.length; // Get the number of goals
   // if (!req.body.text) {
   //   return res.status(400).json({ message: "please add a text field" });
   // }
 
   // Only send the 200 response if the condition is not met
-  res.status(200).json(goals);
+  res.status(200).json({ goalCount, goals });
 });
 
 // @desc     Set Goal
