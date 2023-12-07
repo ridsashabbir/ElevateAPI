@@ -6,23 +6,23 @@ const User = require("../models/userModel");
 // @desc     Register new user
 // @route    POST/api/users
 // @access   public
-const registerUser = (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   res.json({ message: "Register User" });
-};
+});
 
 // @desc     Login a user
 // @route    POST/api/users/login
 // @access   public
-const loginUser = (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   res.json({ message: "Login User" });
-};
+});
 
 // @desc     Get user data
 // @route    GET /api/users/me
 // @access   public
-const getMe = (req, res) => {
+const getMe = asyncHandler(async (req, res) => {
   res.json({ message: "Get current User data" });
-};
+});
 
 module.exports = {
   registerUser,
