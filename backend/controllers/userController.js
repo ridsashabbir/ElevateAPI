@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
-      token: token, // Include the generated token in the response
+      token: generateToken(user._id), // Include the generated token in the response
     });
   } else {
     res.status(400);
@@ -63,6 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id),
     });
   } else {
     console.log("User not found or password does not match");
