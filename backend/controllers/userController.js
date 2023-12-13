@@ -13,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Please add all fields");
   }
 
-  // check if user exits
+  // check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
@@ -32,17 +32,18 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    const token = generateToken(user._id);
+
     res.status(201).json({
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: token, // Include the generated token in the response
     });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
-
-  // res.json({ message: "Register User" });
 });
 
 // @desc     Login a user
@@ -53,6 +54,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // check for user email
   const user = await User.findOne({ email });
+  console.log("User:", user);
+  console.log("Email:", email);
+  console.log("Password:", password);
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
@@ -61,6 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
     });
   } else {
+    console.log("User not found or password does not match");
     res.status(400);
     throw new Error("Invalid Credentials");
   }
@@ -73,6 +78,19 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async (req, res) => {
   res.json({ message: "Get current User data" });
 });
+
+// generate JWT
+const generateToken = (id) => {
+  try {
+    console.log("ID for token generation:", id);
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+  } catch (error) {
+    console.error("Error generating token:", error);
+    throw new Error("Token generation failed");
+  }
+};
 
 module.exports = {
   registerUser,
