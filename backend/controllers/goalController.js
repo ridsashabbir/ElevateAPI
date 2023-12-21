@@ -45,7 +45,7 @@ const updateGoal = asyncHandler(async (req, res) => {
   }
 
   // make sure that only logged in user matches the goal user
-  if (goal.user.toString !== user.id) {
+  if (goal.user.toString() !== user.id) {
     res.status(401);
     throw new Error("user not authorized");
   }
@@ -66,6 +66,19 @@ const deleteGoal = asyncHandler(async (req, res) => {
   if (!goal) {
     res.status(404); // Change status to 404 for "Not Found"
     throw new Error("Goal not found");
+  }
+
+  const user = await User.findById(req.user.id);
+  // check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("user not found");
+  }
+
+  // make sure that only logged in user matches the goal user
+  if (goal.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("user not authorized");
   }
 
   await goal.deleteOne({ _id: req.params.id }); // You don't need to pass req.params.id to remove()
