@@ -5,7 +5,7 @@ const Goal = require("../models/goalModel");
 // @route    GET/api/goals
 // @access   private
 const getGoals = asyncHandler(async (req, res) => {
-  const goals = await Goal.find();
+  const goals = await Goal.find({ user: req.user.id });
   const goalCount = goals.length; // Get the number of goals
 
   // Only send the 200 response if the condition is not met
