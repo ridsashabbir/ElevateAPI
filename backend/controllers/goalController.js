@@ -20,7 +20,7 @@ const setGoal = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "please add a text field" });
   }
 
-  const goal = await Goal.create({ text: req.body.text });
+  const goal = await Goal.create({ text: req.body.text, user: req.user.id });
 
   res.status(200).json(goal);
 });
