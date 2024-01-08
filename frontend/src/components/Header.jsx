@@ -7,6 +7,7 @@ function Header() {
       <div className="logo">
         <Link to="/">GoalSetter</Link>
       </div>
+      <ul></ul>
     </header>
   );
 }
