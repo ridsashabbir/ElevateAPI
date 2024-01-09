@@ -7,7 +7,14 @@ function Header() {
       <div className="logo">
         <Link to="/">GoalSetter</Link>
       </div>
-      <ul></ul>
+      <ul>
+        <li>
+          <Link to="/login">
+            <FaSignInAlt />
+            Login
+          </Link>
+        </li>
+      </ul>
     </header>
   );
 }
