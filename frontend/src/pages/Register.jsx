@@ -9,9 +9,11 @@ function Register() {
   });
   const { name, email, password, password2 } = formData;
   return (
-    <div>
-      <h1>Register</h1>
-    </div>
+    <>
+      <section className="heading">
+        <h1></h1>
+      </section>
+    </>
   );
 }
 
