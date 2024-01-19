@@ -12,6 +12,10 @@ function Register() {
   const { name, email, password, password2 } = formData;
 
   const onChange = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <section className="heading">
@@ -21,7 +25,7 @@ function Register() {
         <p>Please create an account</p>
       </section>
       <section className="form">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
               type="text"
