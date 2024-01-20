@@ -18,11 +18,11 @@ function Register() {
 
   return (
     <>
-      <section className="heading">
-        <h1>
+      <section style={{ fontSize: "30px", fontWeight: "bold" }}>
+        <h1 style={{ marginTop: "0px", height: "10%" }}>
           <FaUser /> Register
         </h1>
-        <p>Please create an account</p>
+        <p style={{ color: "grey" }}>Please create an account</p>
       </section>
       <section className="form">
         <form onSubmit={onSubmit}>
